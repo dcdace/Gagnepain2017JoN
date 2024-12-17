@@ -13,11 +13,13 @@ bida_data_dir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN/data'
 # Define the AssumedEchoSpacing
 AssumedEchoSpacing = 0.000525004
 
+# Load the BIDSLayout
 layout = BIDSLayout(bida_data_dir, validate=False)
 
 # Get all the func file metadata
 func_metadata = layout.get(suffix='bold', extension='json', return_type='file')
 
+# Loop through all the metadata files and add the missing metadata
 for metadata_file in func_metadata:
     with open(metadata_file, 'r') as f:
         metadata = json.load(f)
