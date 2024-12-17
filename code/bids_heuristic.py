@@ -38,9 +38,10 @@ def infotodict(seqinfo):
     # The functional scans
     # You need to specify the task name in the filename. It must be a single string of letters WITHOUT spaces, underscores, or dashes!
     
-    # func_task_practice = create_key('sub-{subject}/func/sub-{subject}_task-practicetnt_run-{item:02d}_bold') # Don't need this
-    func_task_tnt = create_key('sub-{subject}/func/sub-{subject}_task-tnt_run-{item:02d}_bold')            
-    func_task_cueing = create_key('sub-{subject}/func/sub-{subject}_task-cueing_run-{item:02d}_bold')
+    # func_task_practice = create_key('sub-{subject}/func/sub-{subject}_task-practicetnt_run-{item:02d}_bold') # Don't need this             
+    # func_task_cueing = create_key('sub-{subject}/func/sub-{subject}_task-cueing_run-{item:02d}_bold') # uncomment if needed
+    
+    func_task_tnt = create_key('sub-{subject}/func/sub-{subject}_task-tnt_run-{item:02d}_bold')   
     
     # Create the dictionary that will be returned by this function.
     info = {
@@ -48,8 +49,8 @@ def infotodict(seqinfo):
         fmap_mag: [], 
         fmap_phase: [],
         # func_task_practice: [],
-        func_task_tnt: [],
-        func_task_cueing: []
+        # func_task_cueing: [],
+        func_task_tnt: []
         }
 
     # Loop through all the DICOM series and assign them to the appropriate conversion key.
@@ -71,14 +72,14 @@ def infotodict(seqinfo):
         # # Functional practice
         # if 'PractTNT' in s.series_id:
         #     info[func_task_practice].append(s.series_id)
+            
+        # # Functional Cueing
+        # if 'Cueing' in s.series_id and s.dim4 > 100 and 'MoCo' not in s.series_description:
+        #     info[func_task_cueing].append(s.series_id)
         
         # Functional TNT
         if '-TNT' in s.series_id and s.dim4 > 100 and 'MoCo' not in s.series_description:
             info[func_task_tnt].append(s.series_id)
-            
-        # Functional Cueing
-        if 'Cueing' in s.series_id and s.dim4 > 100 and 'MoCo' not in s.series_description:
-            info[func_task_cueing].append(s.series_id)
         
             
     # Return the dictionary
