@@ -38,7 +38,7 @@ def infotodict(seqinfo):
     # The functional scans
     # You need to specify the task name in the filename. It must be a single string of letters WITHOUT spaces, underscores, or dashes!
     
-    func_task_practice = create_key('sub-{subject}/func/sub-{subject}_task-practicetnt_run-{item:02d}_bold')
+    # func_task_practice = create_key('sub-{subject}/func/sub-{subject}_task-practicetnt_run-{item:02d}_bold') # Don't need this
     func_task_tnt = create_key('sub-{subject}/func/sub-{subject}_task-tnt_run-{item:02d}_bold')            
     func_task_cueing = create_key('sub-{subject}/func/sub-{subject}_task-cueing_run-{item:02d}_bold')
     
@@ -47,7 +47,7 @@ def infotodict(seqinfo):
         anat: [], 
         fmap_mag: [], 
         fmap_phase: [],
-        func_task_practice: [],
+        # func_task_practice: [],
         func_task_tnt: [],
         func_task_cueing: []
         }
@@ -68,9 +68,9 @@ def infotodict(seqinfo):
         if 'field_mapping' in s.series_id and s.series_files == 31:
             info[fmap_phase].append(s.series_id)
 
-        # Functional practice
-        if 'PractTNT' in s.series_id:
-            info[func_task_practice].append(s.series_id)
+        # # Functional practice
+        # if 'PractTNT' in s.series_id:
+        #     info[func_task_practice].append(s.series_id)
         
         # Functional TNT
         if '-TNT' in s.series_id and s.dim4 > 100 and 'MoCo' not in s.series_description:
