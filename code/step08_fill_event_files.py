@@ -80,7 +80,7 @@ for events_file_path in events_files:
             # Construct DataFrame for this condition
             new_data = pd.DataFrame({
                 'onset': filtered_events['onset'] / 1000,  # convert ms to seconds
-                'duration': filtered_events['duration'],
+                'duration': 0, #filtered_events['duration'], # set duration to 0
                 'trial_type': condition_name,
                 'response_time': filtered_events['RT'],
                 'stim_file': filtered_events['condition_img']
