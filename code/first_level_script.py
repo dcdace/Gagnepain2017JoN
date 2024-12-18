@@ -39,7 +39,7 @@ print("Started at: " + time.strftime("%H:%M:%S", time.localtime()))
 # ======================================================================
 # DEFINE PARAMETERS
 # =====================================================================
-model_name = 'first-level'
+model_name = 'first-level_duration-0'
 
 bids_path = os.path.join(ds, 'data')
 
@@ -64,6 +64,7 @@ bold = layout.get(
     datatype='func', 
     space='MNI152NLin6Asym', 
     desc='preproc', 
+    task='tnt',
     extension='.nii.gz',
     return_type='filename'
     )
@@ -74,6 +75,7 @@ events = layout.get(
     subject=sID, 
     datatype='func', 
     suffix='events', 
+    task='tnt',
     extension=".tsv", 
     return_type='filename'
     )
@@ -84,6 +86,7 @@ confounds = layout.get(
     subject=sID, 
     datatype='func', 
     desc='confounds', 
+    task='tnt',
     extension=".tsv", 
     return_type='filename'
     )
