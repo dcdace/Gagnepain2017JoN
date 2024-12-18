@@ -3,4 +3,4 @@ data/
 scratch/
 results/
 
-.mat
+*.mat
