@@ -22,7 +22,7 @@ end
 % -------------------------------------------------------------------------
 
 % first level location
-param.model = 'model01';
+param.model = 'model_01';
 param.statPath = fullfile(rootDir, 'results', 'spm_first-level','MNI', param.model);
 
 % subject IDs
@@ -35,17 +35,17 @@ if ~exist(param.savePath, 'dir')
 end
 
 % conditions and contrasts
-param.conditions = {'T', 'NI', 'I'};
+param.conditions = {'negNTi', 'negNTni', 'neutrNTi', 'neutrNTni', 'negT', 'neutrT'};
 param.contrasts = {
-    'Effects of interest', 0 0 0; % will be defined later
-    'T > NT',   1   -0.5   -0.5;
-    'NT > T',  -1   0.5     0.5;
-    'NI > I',   0    1      -1;
-    'I > NI',   0   -1       1;
-    'T > NI',   1   -1       0;
-    'NI > T',   -1   1       0;
-    'T > I',    1    0      -1;
-    'I > T',   -1    0       1
+    'Effects of interest', 0 0 0 0 0 0; % will be defined later
+    'T > NT',   -1/4    -1/4    -1/4    -1/4     1/2     1/2    ;
+    'NT > T',    1/4     1/4     1/4     1/4    -1/2    -1/2    ;
+    'NI > I',   -1/2     1/2    -1/2     1/2      0       0     ;
+    'I > NI',    1/2    -1/2     1/2    -1/2      0       0     ;
+    'T > NI',     0     -1/2      0     -1/2     1/2     1/2    ;
+    'NI > T',     0      1/2      0      1/2    -1/2    -1/2    ;
+    'T > I',    -1/2      0     -1/2      0      1/2     1/2    ;
+    'I > T',     1/2      0      1/2      0     -1/2    -1/2    ;
     };
 
 % -------------------------------------------------------------------------

@@ -20,7 +20,7 @@ function step02_spm_first_level
     % Parameters
     param.BIDS = fullfile(rootDir, 'data');
     param.derivatives = fullfile(rootDir, 'data', 'derivatives', 'for-spm-firstlevel');
-    param.saveDir   = fullfile(rootDir, 'results', 'spm_first-level', 'MNI', 'model01'); % where the results will be saved
+    param.saveDir   = fullfile(rootDir, 'results', 'spm_first-level', 'MNI', 'model_01'); % where the results will be saved
     param.task = 'tnt';
     param.space = 'MNI152NLin6Asym_res-2'; % 'T1w' for native space
     param.bold = 'bold_smoothed.nii'; % the end of the bold file name which to use
@@ -118,6 +118,12 @@ function process_subject(subject, param)
 
     % Define conditions and contrasts
     contrast_names = {
+        'negNTi', ...
+        'neutrNTi', ...
+        'negNTni', ...
+        'neutrNTni', ...
+        'negT', ...
+        'neutrT', ...
         'I', ...
         'NI', ...
         'T', ...
@@ -138,6 +144,12 @@ function process_subject(subject, param)
     NT_conditions = {'negNTi', 'negNTni', 'neutrNTi', 'neutrNTni'};
 
     contrast_conditions = {
+        {{'negNTi'}, []}, ...              % 'negNTi'
+        {{'neutrNTi'}, []}, ...            % 'neutrNTi'
+        {{'negNTni'}, []}, ...             % 'negNTni'
+        {{'neutrNTni'}, []}, ...           % 'neutrNTni'
+        {{'negT'}, []}, ...                % 'negT'
+        {{'neutrT'}, []}, ...              % 'neutrT'
         {I_conditions, []}, ...          % 'I'
         {NI_conditions, []}, ...         % 'NI'
         {T_conditions, []}, ...          % 'T'
