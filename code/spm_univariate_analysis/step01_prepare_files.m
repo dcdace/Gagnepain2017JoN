@@ -37,7 +37,7 @@ function step01_prepare_files
     if numworkers
         try
             parpool(numworkers);
-        catch ME
+        catch
             warning('Could not start parallel pool with %d workers. Proceeding with single-threaded execution.', numworkers);
             numworkers = 0; % Fall back to serial processing
         end

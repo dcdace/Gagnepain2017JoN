@@ -20,18 +20,18 @@ function step02_spm_first_level
     % Parameters
     param.BIDS = fullfile(rootDir, 'data');
     param.derivatives = fullfile(rootDir, 'data', 'derivatives', 'for-spm-firstlevel');
-    param.saveDir   = fullfile(rootDir, 'results', 'spm_first-level', 'MNI', 'model_01'); % where the results will be saved
+    param.saveDir = fullfile(rootDir, 'results', 'spm_first-level', 'MNI', 'model_01'); % where the results will be saved; MNI for MNI space; native for native space    
+    param.space = 'MNI152NLin6Asym_res-2'; % 'T1w' for native space; 'MNI152NLin6Asym_res-2' for MNI space
+    param.bold = 'bold_smoothed.nii'; % the end of the bold file name which to use; 'bold_smoothed.nii' for MNI space; 'preproc_bold.nii' for native space
     param.task = 'tnt';
-    param.space = 'MNI152NLin6Asym_res-2'; % 'T1w' for native space
-    param.bold = 'bold_smoothed.nii'; % the end of the bold file name which to use
-    param.hpf       = 128; % high path filtering. SPM default is 128
+    param.hpf = 128; % high path filtering. SPM default is 128
 
     % Number of workers for distributed computing
     numworkers = 12; % 12 is max at the CBU
     if numworkers
         try
             parpool(numworkers);
-        catch ME
+        catch
             warning('Could not start parallel pool with %d workers. Proceeding with single-threaded execution.', numworkers);
             numworkers = 0; % Fall back to serial processing
         end
