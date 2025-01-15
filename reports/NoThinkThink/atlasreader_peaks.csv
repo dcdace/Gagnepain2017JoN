@@ -1,0 +1,12 @@
+cluster_id,peak_x,peak_y,peak_z,peak_value,volume_mm,aal,desikan_killiany,harvard_oxford
+1.0,14.0,14.0,62.0,11.324800491333008,19328.0,Supp_Motor_Area_R,Unknown,62.0% Right_Superior_Frontal_Gyrus
+2.0,50.0,16.0,4.0,12.24028205871582,17640.0,Frontal_Inf_Oper_R,Right-Cerebral-White-Matter,43.0% Right_Inferior_Frontal_Gyrus_pars_opercularis; 17.0% Right_Frontal_Operculum_Cortex; 8.0% Right_Inferior_Frontal_Gyrus_pars_triangularis
+3.0,38.0,36.0,36.0,7.59874963760376,14824.0,Frontal_Mid_2_R,ctx-rh-rostralmiddlefrontal,40.0% Right_Frontal_Pole; 39.0% Right_Middle_Frontal_Gyrus
+4.0,-44.0,16.0,4.0,8.016063690185547,8024.0,Frontal_Inf_Tri_L,ctx-lh-parsopercularis,40.0% Left_Frontal_Operculum_Cortex; 23.0% Left_Inferior_Frontal_Gyrus_pars_opercularis; 11.0% Left_Inferior_Frontal_Gyrus_pars_triangularis
+5.0,60.0,-44.0,32.0,9.999296188354492,7120.0,SupraMarginal_R,ctx-rh-supramarginal,49.0% Right_Supramarginal_Gyrus_posterior_division; 33.0% Right_Angular_Gyrus
+6.0,16.0,14.0,8.0,6.639268398284912,1656.0,Caudate_R,Right-Caudate,76.0% Right_Caudate
+7.0,-62.0,-52.0,32.0,6.162654876708984,1512.0,no_label,ctx-lh-supramarginal,38.0% Left_Supramarginal_Gyrus_posterior_division; 31.0% Left_Angular_Gyrus
+8.0,58.0,-24.0,-6.0,5.339820861816406,392.0,Temporal_Mid_R,ctx-rh-middletemporal,57.0% Right_Middle_Temporal_Gyrus_posterior_division; 16.0% Right_Superior_Temporal_Gyrus_posterior_division
+9.0,-28.0,50.0,20.0,5.2334442138671875,232.0,Frontal_Sup_2_L,ctx-lh-rostralmiddlefrontal,75.0% Left_Frontal_Pole
+10.0,6.0,-20.0,-2.0,5.207185745239258,176.0,Thalamus_R,Right-Thalamus-Proper,53.0% Right_Thalamus
+11.0,-12.0,10.0,62.0,5.5998921394348145,176.0,Supp_Motor_Area_L,Left-Cerebral-White-Matter,28.0% Left_Superior_Frontal_Gyrus
