@@ -27,9 +27,9 @@ function step01_prepare_files
     param.outpath = fullfile(param.BIDS, 'derivatives', 'for-spm-firstlevel');
     param.modality = 'func';
     param.task = 'tnt';
-    param.space = 'MNI152NLin6Asym_res-2';
+    param.space = 'MNI152NLin6Asym_res-2'; % 'T1w' for native space
     param.confounds_of_interest = {'trans_x', 'trans_y', 'trans_z', 'rot_x', 'rot_y', 'rot_z'};
-    param.smoothing = true;
+    param.smoothing = true; % false for native space, true for MNI space
     param.smoothing_kernel = [8 8 8];
 
     % Number of workers for distributed computing

@@ -3,6 +3,7 @@ data/
 scratch/
 results/
 spm_analysis/
+Job*
 
 *.mat
 *.ipynb

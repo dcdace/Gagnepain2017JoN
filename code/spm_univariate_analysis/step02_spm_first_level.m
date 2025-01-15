@@ -22,7 +22,7 @@ function step02_spm_first_level
     param.derivatives = fullfile(rootDir, 'data', 'derivatives', 'for-spm-firstlevel');
     param.saveDir   = fullfile(rootDir, 'results', 'spm_first-level', 'MNI', 'model01'); % where the results will be saved
     param.task = 'tnt';
-    param.space = 'MNI152NLin6Asym_res-2';
+    param.space = 'MNI152NLin6Asym_res-2'; % 'T1w' for native space
     param.bold = 'bold_smoothed.nii'; % the end of the bold file name which to use
     param.hpf       = 128; % high path filtering. SPM default is 128
 
