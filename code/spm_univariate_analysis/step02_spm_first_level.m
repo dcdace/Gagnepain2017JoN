@@ -49,6 +49,13 @@ function step02_spm_first_level
             warning('Error processing subject %s: %s', subs{s}, ME.message);
         end
     end
+
+    if numworkers
+        delete(gcp('nocreate'));
+    end
+
+    exit; % Ensure MATLAB exits properly
+    
 end
 
 % =========================================================

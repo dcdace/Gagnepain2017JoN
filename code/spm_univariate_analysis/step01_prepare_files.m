@@ -55,6 +55,13 @@ function step01_prepare_files
             warning('Error processing subject %s: %s', subs{s}, ME.message);
         end
     end
+
+    if numworkers
+        delete(gcp('nocreate'));
+    end
+
+    exit; % Ensure MATLAB exits properly
+    
 end
 
 % =========================================================
