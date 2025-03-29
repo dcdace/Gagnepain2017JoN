@@ -1,62 +1,117 @@
-% -------------------------------
-% Dace Apsvalka, @CBU 2025
-% -------------------------------
-% 
-% This script uses prepared fmriprep and BIDS files for first-level analysis in SPM. 
-% 1. Creates the SPM design matrix.
-% 2. Estimates the model.
-% 3. Defines contrasts - accounting for missing conditions.
+% =========================================================================
+% SPM First-Level Analysis
+% =========================================================================
+% Author: Dace Apsvalka, @CBU 2025
 %
-% Run from VSCode:
-% matlab -nodisplay -nosplash -r "step02_spm_first_level; exit;"
-% =========================================================
-function step02_spm_first_level
+% Description:
+%   This script performs first-level analysis in SPM using prepared fMRIprep 
+%   and BIDS files. It performs the following operations:
+%   1. Creates the SPM design matrix for each subject
+%   2. Estimates the model parameters
+%   3. Defines and estimates contrasts of interest (accounting for missing conditions)
+%   The script is parallelized to process multiple subjects simultaneously.
+%
+% Requirements:
+%   - SPM12 must be added to the MATLAB path
+%   - Preprocessed data from step01_prepare_files.m
+%   - Condition files in SPM-compatible format
+%
+% Usage:
+%   Run the script from the command line using:
+%   matlab -nodisplay -nosplash -r "step02_spm_first_level; exit;"
+% =========================================================================
 
-    rootDir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN';
-    
-    addpath(genpath('/imaging/correia/da05/students/mohith/Gagnepain2017JoN/code'))
-    addpath('/imaging/local/software/spm_cbu_svn/releases/spm12_latest/')
+rootDir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN';
 
-    % Parameters
-    param.BIDS = fullfile(rootDir, 'data');
-    param.derivatives = fullfile(rootDir, 'data', 'derivatives', 'for-spm-firstlevel');
-    param.saveDir = fullfile(rootDir, 'results', 'spm_first-level', 'MNI', 'model_01'); % where the results will be saved; MNI for MNI space; native for native space    
-    param.space = 'MNI152NLin6Asym_res-2'; % 'T1w' for native space; 'MNI152NLin6Asym_res-2' for MNI space
-    param.bold = 'bold_smoothed.nii'; % the end of the bold file name which to use; 'bold_smoothed.nii' for MNI space; 'preproc_bold.nii' for native space
-    param.task = 'tnt';
-    param.hpf = 128; % high path filtering. SPM default is 128
+% Check SPM path and add required paths
+spmPath = '/imaging/local/software/spm_cbu_svn/releases/spm12_latest/';
 
-    % Number of workers for distributed computing
-    numworkers = 12; % 12 is max at the CBU
-    if numworkers
-        try
-            parpool(numworkers);
-        catch
-            warning('Could not start parallel pool with %d workers. Proceeding with single-threaded execution.', numworkers);
-            numworkers = 0; % Fall back to serial processing
-        end
-    end
-
-    % Get subject folder names from the prepared derivatives folder
-    subs = cellstr(spm_select('List', param.derivatives, 'dir'));
-    nsub = numel(subs);
-
-    % Parallel loop for subjects
-    parfor (s = 1:nsub, numworkers)
-        try
-            process_subject(subs{s}, param);
-        catch ME
-            warning('Error processing subject %s: %s', subs{s}, ME.message);
-        end
-    end
-
-    if numworkers
-        delete(gcp('nocreate'));
-    end
-
-    exit; % Ensure MATLAB exits properly
-    
+% Check paths existence
+if ~exist(spmPath, 'dir')
+    error('SPM12 directory not found: %s', spmPath);
 end
+
+% Add paths
+addpath(genpath(fullfile(rootDir, 'code')));
+addpath(spmPath);
+
+% Parameters
+param.BIDS = fullfile(rootDir, 'data');
+param.derivatives = fullfile(rootDir, 'data', 'derivatives', 'for-spm-firstlevel');
+param.saveDir = fullfile(rootDir, 'results', 'spm_first-level', 'MNI', 'model_01'); % where the results will be saved; MNI for MNI space; native for native space    
+param.space = 'MNI152NLin6Asym_res-2'; % 'T1w' for native space; 'MNI152NLin6Asym_res-2' for MNI space
+param.bold = 'bold_smoothed.nii'; % the end of the bold file name which to use; 'bold_smoothed.nii' for MNI space; 'preproc_bold.nii' for native space
+param.task = 'tnt';
+param.hpf = 128; % high path filtering. SPM default is 128
+
+% Validate critical directories
+if ~exist(param.BIDS, 'dir')
+    error('BIDS directory not found: %s', param.BIDS);
+end
+if ~exist(param.derivatives, 'dir')
+    error('Derivatives directory not found: %s', param.derivatives);
+end
+if ~exist(fullfile(rootDir, 'results'), 'dir')
+    mkdir(fullfile(rootDir, 'results'));
+end
+if ~exist(fullfile(rootDir, 'results', 'spm_first-level'), 'dir')
+    mkdir(fullfile(rootDir, 'results', 'spm_first-level'));
+end
+if ~exist(fullfile(rootDir, 'results', 'spm_first-level', 'MNI'), 'dir')
+    mkdir(fullfile(rootDir, 'results', 'spm_first-level', 'MNI'));
+end
+if ~exist(param.saveDir, 'dir')
+    mkdir(param.saveDir);
+end
+
+fprintf('Starting SPM first-level analysis...\n');
+fprintf('Using space: %s\n', param.space);
+fprintf('Using BOLD files: %s\n', param.bold);
+fprintf('High-pass filter: %d seconds\n', param.hpf);
+
+% Number of workers for distributed computing
+numworkers = 12; % 12 is max at the CBU
+fprintf('Attempting to start parallel pool with %d workers...\n', numworkers);
+
+if numworkers
+    try
+        poolobj = gcp('nocreate'); % Get current parallel pool
+        
+        if isempty(poolobj)
+            parpool(numworkers);
+            fprintf('Parallel pool started with %d workers\n', numworkers);
+        else
+            fprintf('Using existing parallel pool with %d workers\n', poolobj.NumWorkers);
+            numworkers = poolobj.NumWorkers;
+        end
+    catch ME
+        warning('Could not start parallel pool: %s\nProceeding with single-threaded execution.', ME.message);
+        numworkers = 0; % Fall back to serial processing
+    end
+end
+
+% Get subject folder names from the prepared derivatives folder
+subs = cellstr(spm_select('List', param.derivatives, 'dir'));
+nsub = numel(subs);
+fprintf('Found %d subjects\n', nsub);
+
+% Parallel loop for subjects
+fprintf('Starting first-level analysis for all subjects...\n');
+startTime = tic;
+
+parfor (s = 1:nsub, numworkers)
+    try
+        process_subject(subs{s}, param);
+    catch ME
+        warning('Error processing subject %s: %s', subs{s}, ME.message);
+    end
+end
+
+if numworkers
+    delete(gcp('nocreate'));
+end
+
+fprintf('First-level analysis completed in %.2f minutes.\n', toc(startTime) / 60);
 
 % =========================================================
 % PROCESSING FUNCTION
