@@ -30,7 +30,7 @@ import ants
 # ----------------------------------------
 bids_dir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN/data'
 first_level_dir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN/results/spm_first-level/native/model_01_uNTconcat/'
-MNI_ROI_dir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN/MNI_ROIs/'
+MNI_ROI_dir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN/resources/MNI_ROIs/'
 out_dir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN/data/derivatives/for-dcm'
 
 rois = ['hc330_Right', 'withinConj_rDLPFC']

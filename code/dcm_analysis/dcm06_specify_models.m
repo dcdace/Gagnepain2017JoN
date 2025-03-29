@@ -39,7 +39,7 @@ param.ROIsub = 'model_01_uNTconcat_eoi_top20perc';
 param.version = 'rDLPFC01_rHC300_TNT_model_00_RolandsNeuronSpace_not_center';
 
 param.saveDir = fullfile(param.projectPath, 'results', 'DCM', param.version);
-param.modelDir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN/DCM_model_spaces/DLPFC_HC_RolandsNeuronSpace';
+param.modelDir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN/resources/DCM_model_spaces/DLPFC_HC_RolandsNeuronSpace';
 
 param.center = 0; % Centering option for DCM
 
