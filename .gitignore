@@ -5,5 +5,4 @@ results/
 spm_analysis/
 create_modelspace/
 Job*
-*.mat
-*.nii
+*metadata.mat
