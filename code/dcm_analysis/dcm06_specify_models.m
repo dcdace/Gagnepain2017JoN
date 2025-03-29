@@ -41,6 +41,13 @@ param.version = 'rDLPFC01_rHC300_TNT_model_00_RolandsNeuronSpace_not_center';
 param.saveDir = fullfile(param.projectPath, 'results', 'DCM', param.version);
 param.modelDir = '/imaging/correia/da05/students/mohith/Gagnepain2017JoN/resources/DCM_model_spaces/DLPFC_HC_RolandsNeuronSpace';
 
+% Define ROIs and conditions
+% Note: The order of ROIs and Conditions must correspond to the specified model space!
+param.rois = {'withinConj_rDLPFC', 'hc330_Right'};
+param.cond = {'u', 'NT'};
+param.ncond = size(param.cond, 2);
+param.nrois = size(param.rois, 2);
+
 param.center = 0; % Centering option for DCM
 
 % Validate critical directories
@@ -59,13 +66,6 @@ if ~exist(param.saveDir, 'dir')
     fprintf('Creating output directory: %s\n', param.saveDir);
     mkdir(param.saveDir);
 end
-
-% Define ROIs and conditions
-% Note: The order of ROIs and Conditions must correspond to the specified model space!
-param.rois = {'withinConj_rDLPFC', 'hc330_Right'};
-param.cond = {'u', 'NT'};
-param.ncond = size(param.cond, 2);
-param.nrois = size(param.rois, 2);
 
 fprintf('Model specification will use:\n');
 fprintf('  ROIs: %s\n', strjoin(param.rois, ', '));

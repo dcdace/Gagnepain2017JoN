@@ -4,12 +4,12 @@
 % Author: Dace Apsvalka, @CBU 2025
 %
 % Description:
-%   This script performs Bayesian Model Selection (BMS) on all DCM models
-%   without family-wise classification. It runs a random effects analysis
+%   This script performs Bayesian Model Selection (BMS) on all DCM models. It runs a random effects analysis
 %   and performs Bayesian Model Averaging across all models.
 %
 % Outputs:
 %   - BMS results saved in the specified directory
+%   - BMS results as an image
 %
 % Requirements:
 %   - SPM12 must be added to the MATLAB path

@@ -38,9 +38,9 @@ addpath(spmPath);
 % Parameters
 param.BIDS = fullfile(rootDir, 'data');
 param.derivatives = fullfile(rootDir, 'data', 'derivatives', 'for-spm-firstlevel');
-param.saveDir = fullfile(rootDir, 'results', 'spm_first-level', 'MNI', 'model_01'); % where the results will be saved; MNI for MNI space; native for native space    
-param.space = 'MNI152NLin6Asym_res-2'; % 'T1w' for native space; 'MNI152NLin6Asym_res-2' for MNI space
-param.bold = 'bold_smoothed.nii'; % the end of the bold file name which to use; 'bold_smoothed.nii' for MNI space; 'preproc_bold.nii' for native space
+param.saveDir = fullfile(rootDir, 'results', 'spm_first-level', 'native', 'model_01'); % where the results will be saved; MNI for MNI space; native for native space    
+param.space = 'T1w'; % 'T1w' for native space; 'MNI152NLin6Asym_res-2' for MNI space
+param.bold = 'bold_bold.nii'; % the end of the bold file name which to use; 'bold_smoothed.nii' for MNI space; 'preproc_bold.nii' for native space
 param.task = 'tnt';
 param.hpf = 128; % high path filtering. SPM default is 128
 

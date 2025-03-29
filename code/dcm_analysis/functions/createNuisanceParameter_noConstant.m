@@ -1,4 +1,4 @@
-function nuisancefileOutput = createNuisanceParameter_noConstant_edited(nRuns, confounds, nscans, saveDir)
+function nuisancefileOutput = createNuisanceParameter_noConstant(nRuns, confounds, nscans, saveDir)
 
 
 % confounds_per_run = struct with confound regressors (e.g., movement

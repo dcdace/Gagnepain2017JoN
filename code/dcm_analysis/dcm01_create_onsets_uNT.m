@@ -97,7 +97,7 @@ for s = 1 : nsub
         %% remove conditions from the session borders and add to Nuisance
         thisRunLenght = nscans(sess) * TR;
         if sess == size(nscans, 2) % don't remove anything from the last run
-            brd = 0; % 24 second cutoff
+            brd = 0; % 0 second cutoff
         else
             brd = 24; % 24 second cutoff
         end
