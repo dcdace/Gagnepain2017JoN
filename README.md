@@ -65,7 +65,7 @@ DCM needs subject-level analysis done in SPM, therefore I use SPM here.
     - Addionally, perform the group-level analysis using Nilearn with non-parametric permutation tests and visualises the results: `reports/Group-Level-Analysis_on_SPM_first-level.ipynb`
 
 ### 3. Dynamic Causal Modeling (DCM)
-Perform an example DCM analysis. The example uses a model space from [Benoit et al. (2012)](https://doi.org/10.1016/j.neuron.2012.07.025) paper. It looks at rDLPFC-HC coupling modulated by No-Think condition. It has 12 models in the model space. The models are grouped in Input and Modulation families. 
+Performs an example DCM analysis. The example uses a model space from [Benoit et al. (2012)](https://doi.org/10.1016/j.neuron.2012.07.025) paper. It looks at rDLPFC-HC coupling modulated by No-Think condition. It has 12 models in the model space. The models are grouped in Input and Modulation families. 
 
 1. **Concatenate multiple functional runs into a single run for DCM model**
 
@@ -108,7 +108,7 @@ Perform an example DCM analysis. The example uses a model space from [Benoit et 
       - ROIs: rDLPFC, Hippocampus  
       - Conditions: u, NT
 
-4. **DCM mdel specification and estimation**
+4. **DCM model specification and estimation**
 
       - Specify the models: `code/dcm_analysis/dcm06_specify_models.m`
       - Estimate the models: `code/dcm_analysis/dcm07_estimate_models.m` (Once the model has been estimated, a letter 'e' will be added to the file name.)
