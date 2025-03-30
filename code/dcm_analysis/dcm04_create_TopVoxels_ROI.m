@@ -47,8 +47,8 @@ param.first_level_dir = fullfile(param.projectPath, 'results', 'spm_first-level'
 param.stats = 'model_01_uNTconcat';
 param.roiPath = fullfile(param.dataPath, 'derivatives', 'for-dcm');
 param.ROI = {'hc330_Right', 'withinConj_rDLPFC'};
-param.con = 'ess_0001.nii'; % Essential effects contrast
-param.perc = 0.1; % Percentage of top voxels to include (0.2 = top 20%)
+param.con = 'ess_0001.nii'; % Effects of Interest contrast
+param.perc = 0.1; % Percentage of top voxels to include (e.g., 0.2 = top 20%)
 
 % Validate critical directories
 if ~exist(param.dataPath, 'dir')
